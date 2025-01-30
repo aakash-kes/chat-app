@@ -1,6 +1,45 @@
-import { Dumbbell, FlaskRoundIcon as Flask, Shirt, GraduationCap, Monitor, Globe, Utensils, Plane } from "lucide-react"
+import { Dumbbell, FlaskRoundIcon as Flask, Shirt, GraduationCap, Monitor, Globe, Utensils, Plane } from "lucide-react";
+import { SectionProps, MenuItemProps } from "@/lib/types";
 
-export default function WelcomeScreen() {
+const MenuItem: React.FC<MenuItemProps> = ({ icon: Icon, label }) => (
+  <button className="menu-item w-full flex items-center space-x-2">
+    <Icon className="h-5 w-5" />
+    <span>{label}</span>
+  </button>
+);
+
+const Section: React.FC<SectionProps> = ({ title, bgColor, textColor, items }) => (
+  <div className="space-y-4">
+    <h2 className={`text-lg font-semibold ${bgColor} ${textColor} px-4 py-2 rounded`}>
+      {title}
+    </h2>
+    <div className="space-y-2">
+      {items.map((item, index) => (
+        <MenuItem key={index} icon={item.icon} label={item.label} />
+      ))}
+    </div>
+  </div>
+);
+
+const WelcomeScreen: React.FC = () => {
+  const createItems = [
+    { icon: Flask, label: "Mini Volcano Project" },
+    { icon: Dumbbell, label: "Make Scented Candles" },
+    { icon: Dumbbell, label: "Home Workout Routine" },
+  ];
+
+  const learnItems = [
+    { icon: Shirt, label: "Style Saree" },
+    { icon: GraduationCap, label: "Public Speaking" },
+    { icon: Monitor, label: "Artificial Intelligence" },
+  ];
+
+  const discoverItems = [
+    { icon: Globe, label: "Cultural Festivals" },
+    { icon: Utensils, label: "Famous Street Foods" },
+    { icon: Plane, label: "Historical Places" },
+  ];
+
   return (
     <div className="h-full overflow-y-auto p-4 md:p-8">
       <div className="max-w-4xl mx-auto space-y-8">
@@ -10,65 +49,13 @@ export default function WelcomeScreen() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {/* CREATE Section */}
-          <div className="space-y-4">
-            <h2 className="text-lg font-semibold bg-yellow-400 text-black px-4 py-2 rounded">CREATE</h2>
-            <div className="space-y-2">
-              <button className="menu-item w-full">
-                <Flask className="h-5 w-5" />
-                <span>Mini Volcano Project</span>
-              </button>
-              <button className="menu-item w-full">
-                <Dumbbell className="h-5 w-5" />
-                <span>Make Scented Candles</span>
-              </button>
-              <button className="menu-item w-full">
-                <Dumbbell className="h-5 w-5" />
-                <span>Home Workout Routine</span>
-              </button>
-            </div>
-          </div>
-
-          {/* LEARN Section */}
-          <div className="space-y-4">
-            <h2 className="text-lg font-semibold bg-teal-500 text-white px-4 py-2 rounded">LEARN</h2>
-            <div className="space-y-2">
-              <button className="menu-item w-full">
-                <Shirt className="h-5 w-5" />
-                <span>Style Saree</span>
-              </button>
-              <button className="menu-item w-full">
-                <GraduationCap className="h-5 w-5" />
-                <span>Public Speaking</span>
-              </button>
-              <button className="menu-item w-full">
-                <Monitor className="h-5 w-5" />
-                <span>Artificial Intelligence</span>
-              </button>
-            </div>
-          </div>
-
-          {/* DISCOVER Section */}
-          <div className="space-y-4">
-            <h2 className="text-lg font-semibold bg-green-500 text-white px-4 py-2 rounded">DISCOVER</h2>
-            <div className="space-y-2">
-              <button className="menu-item w-full">
-                <Globe className="h-5 w-5" />
-                <span>Cultural Festivals</span>
-              </button>
-              <button className="menu-item w-full">
-                <Utensils className="h-5 w-5" />
-                <span>Famous Street Foods</span>
-              </button>
-              <button className="menu-item w-full">
-                <Plane className="h-5 w-5" />
-                <span>Historical Places</span>
-              </button>
-            </div>
-          </div>
+          <Section title="CREATE" bgColor="bg-yellow-400" textColor="text-black" items={createItems} />
+          <Section title="LEARN" bgColor="bg-teal-500" textColor="text-white" items={learnItems} />
+          <Section title="DISCOVER" bgColor="bg-green-500" textColor="text-white" items={discoverItems} />
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
+export default WelcomeScreen;

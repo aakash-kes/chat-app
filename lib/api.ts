@@ -1,11 +1,12 @@
-import type { Message } from "./types"
+import type { Message } from "./types";
 
-// Simulated delay function
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-// Mock chat messages
 export async function getChatMessages(chatId: string): Promise<Message[]> {
-  await delay(1000)
+  await delay(1000);
+  if (chatId === "1") {
+    return [];
+  }
   return [
     {
       id: "1",
@@ -19,19 +20,21 @@ export async function getChatMessages(chatId: string): Promise<Message[]> {
     },
     {
       id: "3",
-      content: "I'd be happy to help you with your project. What kind of project are you working on?",
+      content:
+        "I'd be happy to help you with your project. What kind of project are you working on?",
       type: "ai",
     },
-  ]
+  ];
 }
 
-// Mock send message function
-export async function sendMessage(chatId: string, content: string): Promise<Message> {
-  await delay(1000)
+export async function sendMessage(
+  chatId: string,
+  content: string
+): Promise<Message> {
+  await delay(1000);
   return {
     id: Date.now().toString(),
     content: `I received your message: "${content}". How can I help you further?`,
     type: "ai",
-  }
+  };
 }
-
